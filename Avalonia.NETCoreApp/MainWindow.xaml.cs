@@ -1,10 +1,9 @@
-using Avalonia;
-using Avalonia.Controls;
+using Atlas.UI;
 using Avalonia.Markup.Xaml;
 
 namespace Avalonia.NETCoreApp
 {
-    public class MainWindow : Atlas.UI.Window
+    public class MainWindow : Window
     {
         public MainWindow()
         {

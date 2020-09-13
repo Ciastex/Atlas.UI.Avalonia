@@ -1,48 +1,66 @@
 <Style xmlns="https://github.com/avaloniaui"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:atlas="clr-namespace:Atlas.UI;assembly=Atlas.UI"
-       Selector=":is(Window)">
-    <Setter Property="Foreground" Value="#AAAAAA" />
+       xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+       xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+       Selector=":is(atlas|Window)">
     <Setter Property="HasSystemDecorations" Value="False" />
+    <Setter Property="Background" Value="#2D2D30" />
+    <Setter Property="Foreground" Value="#AAAAAA" />
+
     <Setter Property="BorderBrush" Value="#007ACC" />
     <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="Background" Value="#2D2D30" />
+
+    <Setter Property="ShowCaptionBarSeparator" Value="False" />
 
     <Setter Property="Template">
         <ControlTemplate>
-            <Border Background="#00000000">
-                <Border BorderBrush="{TemplateBinding BorderBrush}"
-                        Margin="2"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Background="{TemplateBinding Background}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    Margin="0"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}">
+                <VisualLayerManager>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                    <VisualLayerManager>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="28" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <Border Grid.Row="0"
+                                Name="PART_CaptionBar"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                BorderBrush="#444444"
+                                BorderThickness="0,0,0,0"
+                                Background="{TemplateBinding Background}">
 
-                            <Border Grid.Row="0"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    Background="{TemplateBinding Background}"
-                                    Name="PART_CaptionBar">
-                                <TextBlock Text="{TemplateBinding Title}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center" />
-                            </Border>
+                            <TextBlock Text="{TemplateBinding Title}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
 
-                            <ContentPresenter Name="PART_ContentPresenter"
-                                              Grid.Row="1"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Grid>
-                    </VisualLayerManager>
-                </Border>
+                            <i:Interaction.Behaviors>
+                                <ia:DataTriggerBehavior
+                                    Binding="{Binding ShowCaptionBarSeparator, RelativeSource={RelativeSource TemplatedParent}}"
+                                    ComparisonCondition="Equal"
+                                    Value="True">
+                                    <ia:ChangePropertyAction PropertyName="BorderThickness">
+                                        <ia:ChangePropertyAction.Value>
+                                            <Thickness>0,0,0,1</Thickness>
+                                        </ia:ChangePropertyAction.Value>
+                                    </ia:ChangePropertyAction>
+                                </ia:DataTriggerBehavior>
+                            </i:Interaction.Behaviors>
+                        </Border>
+
+                        <ContentPresenter Grid.Row="1"
+                                          Name="PART_ContentPresenter"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </VisualLayerManager>
             </Border>
         </ControlTemplate>
     </Setter>
