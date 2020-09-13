@@ -33,11 +33,80 @@
                                 BorderBrush="#444444"
                                 BorderThickness="0,0,0,0"
                                 Background="{TemplateBinding Background}">
+                            <Border.Styles>
+                                <Style Selector="Button.caption">
+                                    <Setter Property="Background" Value="#2D2D30" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                </Style>
 
-                            <TextBlock Text="{TemplateBinding Title}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center" />
+                                <Style Selector="Button.caption:pointerover">
+                                    <Setter Property="Background" Value="#666666" />
+                                </Style>
+                            </Border.Styles>
 
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="28" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0"
+                                       Source="{TemplateBinding Icon}"
+                                       Width="16"
+                                       Height="16"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{TemplateBinding Title}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+
+                                <Button Grid.Column="2"
+                                        Name="PART_MinimizeButton"
+                                        Width="28"
+                                        Height="28"
+                                        Classes="caption">
+                                    <Image Source="avares://Atlas.UI/Resources/Icons/caption_minimize.png"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="1,0,0,0"
+                                           Width="17"
+                                           Height="16" />
+                                </Button>
+
+                                <Button Grid.Column="3"
+                                        Name="PART_MaximizeButton"
+                                        Width="28"
+                                        Height="28"
+                                        Classes="caption">
+                                    <Image Source="avares://Atlas.UI/Resources/Icons/caption_maximize.png"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="1,0,0,0"
+                                           Width="17"
+                                           Height="16" />
+                                </Button>
+
+                                <Button Grid.Column="4"
+                                        Name="PART_CloseButton"
+                                        Width="28"
+                                        Height="28"
+                                        Classes="caption">
+                                    <Image Source="avares://Atlas.UI/Resources/Icons/caption_close.png"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Margin="1,0,0,0"
+                                           Width="17"
+                                           Height="16" />
+                                </Button>
+                            </Grid>
+                            
                             <i:Interaction.Behaviors>
                                 <ia:DataTriggerBehavior
                                     Binding="{Binding ShowCaptionBarSeparator, RelativeSource={RelativeSource TemplatedParent}}"

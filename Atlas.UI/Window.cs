@@ -11,6 +11,10 @@ namespace Atlas.UI
     {
         Type IStyleable.StyleKey => typeof(Window);
 
+        private Button _minimizeButton;
+        private Button _maximizeButton;
+        private Button _closeButton;
+
         private double _resizeBorderThickness = 5;
         private WindowEdge? _currentResizeEdge;
 
@@ -101,9 +105,31 @@ namespace Atlas.UI
         {
             var captionBarBorder = e.NameScope.Find<Border>("PART_CaptionBar");
 
+            _minimizeButton = e.NameScope.Find<Button>("PART_MinimizeButton");
+            _maximizeButton = e.NameScope.Find<Button>("PART_MaximizeButton");
+            _closeButton = e.NameScope.Find<Button>("PART_CloseButton");
+
+            _minimizeButton.Click += (s, ev) =>
+            {
+                WindowState = WindowState.Minimized;
+            };
+
+            _maximizeButton.Click += (s, ev) =>
+            {
+                ToggleMaximize();
+            };
+
+            _closeButton.Click += (s, ev) =>
+            {
+                Close();
+            };
+
             captionBarBorder.PointerPressed += (s, ev) =>
             {
                 if (_currentResizeEdge != null)
+                    return;
+
+                if (_minimizeButton.IsPointerOver || _maximizeButton.IsPointerOver || _closeButton.IsPointerOver)
                     return;
 
                 var updateKind = ev.GetCurrentPoint(this).Properties.PointerUpdateKind;
@@ -115,15 +141,23 @@ namespace Atlas.UI
 
             captionBarBorder.DoubleTapped += (s, ev) =>
             {
+                if (_minimizeButton.IsPointerOver || _maximizeButton.IsPointerOver || _closeButton.IsPointerOver)
+                    return;
+                
                 if (captionBarBorder.IsPointerOver)
                 {
-                    WindowState = WindowState == WindowState.Maximized 
-                        ? WindowState.Normal 
-                        : WindowState.Maximized;
+                    ToggleMaximize();
                 }
             };
 
             base.OnTemplateApplied(e);
+        }
+
+        private void ToggleMaximize()
+        {
+            WindowState = WindowState == WindowState.Maximized
+                ? WindowState.Normal
+                : WindowState.Maximized;
         }
     }
 }

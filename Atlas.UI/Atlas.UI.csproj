@@ -10,6 +10,12 @@
     <AvaloniaResource Include="**\*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
+    <None Remove="Resources\Icons\caption_close.png" />
+    <AvaloniaResource Include="Resources\Icons\caption_close.png" />
+    <None Remove="Resources\Icons\caption_maximize.png" />
+    <AvaloniaResource Include="Resources\Icons\caption_maximize.png" />
+    <None Remove="Resources\Icons\caption_minimize.png" />
+    <AvaloniaResource Include="Resources\Icons\caption_minimize.png" />
   </ItemGroup>
   
   <ItemGroup>
