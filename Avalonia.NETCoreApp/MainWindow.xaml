@@ -1,0 +1,9 @@
+<atlas:Window xmlns="https://github.com/avaloniaui"
+              xmlns:atlas="clr-namespace:Atlas.UI;assembly=Atlas.UI"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              x:Class="Avalonia.NETCoreApp.MainWindow"
+              Title="Atlas.UI for Avalonia">
+    <Grid Margin="4">
+        <TextBlock Text="lorem ipsum dolor sit amet consectetur adipisici elit" />
+    </Grid>
+</atlas:Window>

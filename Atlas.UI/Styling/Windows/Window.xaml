@@ -1,0 +1,49 @@
+<Style xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:atlas="clr-namespace:Atlas.UI;assembly=Atlas.UI"
+       Selector=":is(Window)">
+    <Setter Property="Foreground" Value="#AAAAAA" />
+    <Setter Property="HasSystemDecorations" Value="False" />
+    <Setter Property="BorderBrush" Value="#007ACC" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Background" Value="#2D2D30" />
+
+    <Setter Property="Template">
+        <ControlTemplate>
+            <Border Background="#00000000">
+                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        Margin="2"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">
+
+                    <VisualLayerManager>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    Name="PART_CaptionBar">
+                                <TextBlock Text="{TemplateBinding Title}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                            </Border>
+
+                            <ContentPresenter Name="PART_ContentPresenter"
+                                              Grid.Row="1"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </VisualLayerManager>
+                </Border>
+            </Border>
+        </ControlTemplate>
+    </Setter>
+</Style>
